@@ -2,6 +2,9 @@
   "name": "notification-to-Slack",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "sh ./build.sh"
+  },
   "license": "MIT",
   "dependencies": {
     "@slack/web-api": "^6.1.0",
