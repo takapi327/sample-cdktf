@@ -6,7 +6,6 @@ class MyStack extends TerraformStack {
     super(scope, name);
 
     // define resources here
-
   }
 }
 
