@@ -12,6 +12,7 @@ import {
   SecurityGroup,
   SecurityGroupRule,
   Alb,
+  AlbTargetGroup
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -168,6 +169,22 @@ class SampleCdktfStack extends TerraformStack {
       subnets:          [Token.asString(publicSubnet1.id), Token.asString(publicSubnet2.id)],
       ipAddressType:    'ipv4',
       enableHttp2:      true
+    });
+
+    const albTargetGroup = new AlbTargetGroup(scope, 'sample-cdktf-alb-target-group', {
+      name:       'sample-cdktf-alb-target-group',
+      port:       80,
+      protocol:   'HTTP',
+      targetType: 'ip',
+      vpcId:      Token.asString(vpc.id),
+      healthCheck: [{
+        interval:           30,
+        path:               '/',
+        port:               'traffic-port',
+        protocol:           'HTTP',
+        timeout:            5,
+        unhealthyThreshold: 2
+      }]
     });
   }
 }
