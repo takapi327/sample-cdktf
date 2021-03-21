@@ -112,21 +112,21 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** Association to Public RouteTable */
-    new RouteTableAssociation(this, 'sample-cdktf-public-rtb1', {
+    new RouteTableAssociation(this, 'sample-cdktf-public-rtb-association1', {
       routeTableId: Token.asString(publicRouteTable.id),
       subnetId:     Token.asString(publicSubnet1.id)
     });
-    new RouteTableAssociation(this, 'sample-cdktf-public-rtb2', {
+    new RouteTableAssociation(this, 'sample-cdktf-public-rtb-association2', {
       routeTableId: Token.asString(publicRouteTable.id),
       subnetId:     Token.asString(publicSubnet2.id)
     });
 
     /** Association to Private RouteTable */
-    new RouteTableAssociation(this, 'sample-cdktf-private-rtb1', {
+    new RouteTableAssociation(this, 'sample-cdktf-private-rtb-association1', {
       routeTableId: Token.asString(privateRouteTable.id),
       subnetId:     Token.asString(privateSubnet1.id)
     });
-    new RouteTableAssociation(this, 'sample-cdktf-private-rtb2', {
+    new RouteTableAssociation(this, 'sample-cdktf-private-rtb-association2', {
       routeTableId: Token.asString(privateRouteTable.id),
       subnetId:     Token.asString(privateSubnet2.id)
     });
