@@ -12,7 +12,8 @@ import {
   SecurityGroup,
   SecurityGroupRule,
   Alb,
-  AlbTargetGroup
+  AlbTargetGroup,
+  AlbListener
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -184,6 +185,16 @@ class SampleCdktfStack extends TerraformStack {
         protocol:           'HTTP',
         timeout:            5,
         unhealthyThreshold: 2
+      }]
+    });
+
+    const albListenerHTTP = new AlbListener(scope, 'sample-cdktf-alb-listener', {
+      loadBalancerArn: Token.asString(alb.arn),
+      port:            80,
+      protocol:        'HTTP',
+      defaultAction:   [{
+        targetGroupArn: Token.asString(albTargetGroup.arn),
+        type:           'forward'
       }]
     });
   }
