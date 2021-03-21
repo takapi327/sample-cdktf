@@ -8,7 +8,8 @@ import {
   NatGateway,
   Eip,
   RouteTable,
-  RouteTableAssociation
+  RouteTableAssociation,
+  SecurityGroup
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -129,6 +130,13 @@ class SampleCdktfStack extends TerraformStack {
     new RouteTableAssociation(this, 'sample-cdktf-private-rtb-association2', {
       routeTableId: Token.asString(privateRouteTable.id),
       subnetId:     Token.asString(privateSubnet2.id)
+    });
+
+    /** SecurityGroup */
+    const security = new SecurityGroup(this, 'sample-cdktf-security-group', {
+      name:  'sample-cdktf',
+      vpcId: Token.asString(vpc.id),
+      tags:  { ['Name']: 'sample-cdktf' }
     });
   }
 }
