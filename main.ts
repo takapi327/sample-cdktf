@@ -9,7 +9,8 @@ import {
   Eip,
   RouteTable,
   RouteTableAssociation,
-  SecurityGroup
+  SecurityGroup,
+  SecurityGroupRule
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -137,6 +138,24 @@ class SampleCdktfStack extends TerraformStack {
       name:  'sample-cdktf',
       vpcId: Token.asString(vpc.id),
       tags:  { ['Name']: 'sample-cdktf' }
+    });
+
+    /** SecurityGroup Rule */
+    new SecurityGroupRule(this, 'sample-cdktf-security-ingress', {
+      cidrBlocks:      ['0.0.0.0/0'],
+      fromPort:        80,
+      protocol:        'tcp',
+      securityGroupId: Token.asString(security.id),
+      toPort:          80,
+      type:            'ingress'
+    });
+    new SecurityGroupRule(this, 'sample-cdktf-security-egress', {
+      cidrBlocks:      ['0.0.0.0/0'],
+      fromPort:        0,
+      protocol:        'all',
+      securityGroupId: Token.asString(security.id),
+      toPort:          0,
+      type:            'egress'
     });
   }
 }
