@@ -59,7 +59,14 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** NatGateway */
-
+    const eip = new Eip(this, 'sample-cdktf-eip', {
+      vpc: true
+    });
+    const natGateway = new NatGateway(this, 'sample-cdktf-nat-gateway', {
+      allocationId: Token.asString(eip.id),
+      subnetId:     Token.asString(publicSubnet1.id),
+      tags:         { ['Name']: 'sample-cdktf nat-gateway-production' }
+    });
   }
 }
 
