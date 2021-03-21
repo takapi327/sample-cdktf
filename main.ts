@@ -1,6 +1,6 @@
 import { Construct } from 'constructs';
 import { App, TerraformStack, Token } from 'cdktf';
-import { AwsProvider, Vpc, Subnet } from './.gen/providers/aws';
+import { AwsProvider, Vpc, Subnet, InternetGateway, NatGateway, Eip } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -51,6 +51,15 @@ class SampleCdktfStack extends TerraformStack {
       mapPublicIpOnLaunch: true,
       tags:                { ['Name']: 'Private2 AZ1c sample-cdktf' }
     });
+
+    /** InternetGateway */
+    const internetGateway = new InternetGateway(this, 'sample-cdktf-igw-production', {
+      vpcId: Token.asString(vpc.id),
+      tags:  { ['Name']: 'igw-production sample-cdktf' }
+    });
+
+    /** NatGateway */
+
   }
 }
 
