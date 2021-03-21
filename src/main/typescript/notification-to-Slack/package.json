@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@slack/web-api": "^6.1.0",
+    "cdktf-cli": "^0.2.0",
     "typescript": "^4.2.3"
   }
 }
