@@ -10,7 +10,8 @@ import {
   RouteTable,
   RouteTableAssociation,
   SecurityGroup,
-  SecurityGroupRule
+  SecurityGroupRule,
+  Alb,
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -156,6 +157,17 @@ class SampleCdktfStack extends TerraformStack {
       securityGroupId: Token.asString(security.id),
       toPort:          0,
       type:            'egress'
+    });
+
+    /** ApplicationLoadBalancer */
+    const alb = new Alb(this, 'sample-cdktf-alb', {
+      name:             'sample-cdktf-alb',
+      internal:         false,
+      loadBalancerType: 'application',
+      securityGroups:   [Token.asString(security.id), Token.asString(vpc.defaultSecurityGroupId)],
+      subnets:          [Token.asString(publicSubnet1.id), Token.asString(publicSubnet2.id)],
+      ipAddressType:    'ipv4',
+      enableHttp2:      true
     });
   }
 }
