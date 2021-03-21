@@ -80,7 +80,7 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** Public Route Table */
-    const publicRouteTable = new RouteTable(scope, 'sample-cdktf-public-rtb', {
+    const publicRouteTable = new RouteTable(this, 'sample-cdktf-public-rtb', {
       vpcId: Token.asString(vpc.id),
       route: [{
         cidrBlock:              '0.0.0.0/0',
@@ -97,7 +97,7 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /**　Private Route Table　*/
-    const privateRouteTable =　new RouteTable(scope, 'sample-cdktf-private-rtb', {
+    const privateRouteTable =　new RouteTable(this, 'sample-cdktf-private-rtb', {
       vpcId: vpc.id,
       route: [{
         cidrBlock:              '0.0.0.0/0',
