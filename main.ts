@@ -84,7 +84,7 @@ class SampleCdktfStack extends TerraformStack {
       vpcId: Token.asString(vpc.id),
       route: [{
         cidrBlock:              '0.0.0.0/0',
-        gatewayId:              internetGateway.id,
+        gatewayId:              Token.asString(internetGateway.id),
         ipv6CidrBlock:          '',
         egressOnlyGatewayId:    '',
         instanceId:             '',
@@ -98,14 +98,14 @@ class SampleCdktfStack extends TerraformStack {
 
     /**　Private Route Table　*/
     const privateRouteTable =　new RouteTable(this, 'sample-cdktf-private-rtb', {
-      vpcId: vpc.id,
+      vpcId:Token.asString(vpc.id),
       route: [{
         cidrBlock:              '0.0.0.0/0',
         gatewayId:              '',
         ipv6CidrBlock:          '',
         egressOnlyGatewayId:    '',
         instanceId:             '',
-        natGatewayId:           natGateway.id,
+        natGatewayId:           Token.asString(natGateway.id),
         networkInterfaceId:     '',
         transitGatewayId:       '',
         vpcPeeringConnectionId: ''
