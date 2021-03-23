@@ -13,7 +13,8 @@ import {
   SecurityGroupRule,
   Alb,
   AlbTargetGroup,
-  AlbListener
+  AlbListener,
+  AlbListenerRule
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -188,13 +189,26 @@ class SampleCdktfStack extends TerraformStack {
       }]
     });
 
-    const albListenerHTTP = new AlbListener(scope, 'sample-cdktf-alb-listener', {
+    const albListener = new AlbListener(scope, 'sample-cdktf-alb-listener', {
       loadBalancerArn: Token.asString(alb.arn),
       port:            80,
       protocol:        'HTTP',
       defaultAction:   [{
         targetGroupArn: Token.asString(albTargetGroup.arn),
         type:           'forward'
+      }]
+    });
+
+    new AlbListenerRule(this, 'sample-cdktf-alb-listener-rule', {
+      listenerArn: albListener.arn,
+      priority:    100,
+      action:      [{
+        type:          'forward',
+        targetGroupArn: albTargetGroup.arn
+      }],
+      condition: [{
+        field: 'path-pattern',
+        values: ['*']
       }]
     });
   }
