@@ -14,7 +14,8 @@ import {
   Alb,
   AlbTargetGroup,
   AlbListener,
-  AlbListenerRule
+  AlbListenerRule,
+  EcsCluster
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -210,6 +211,11 @@ class SampleCdktfStack extends TerraformStack {
         field: 'path-pattern',
         values: ['*']
       }]
+    });
+
+    /** ElasticContainerService */
+    const ecsCluster = new EcsCluster(this, 'sample-cdktf-cluster', {
+      name: 'sample-cdktf-cluster'
     });
   }
 }
