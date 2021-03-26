@@ -2,6 +2,7 @@ import { Construct } from 'constructs';
 import { App, TerraformStack, Token } from 'cdktf';
 import {
   AwsProvider,
+  IamRole,
   Vpc,
   Subnet,
   InternetGateway,
@@ -26,6 +27,24 @@ class SampleCdktfStack extends TerraformStack {
     /** AwsProvider */
     new AwsProvider(this, 'sample-cdktf', {
       region: 'ap-northeast-1'
+    });
+
+    /** Role */
+    const ecsTaskRole = new IamRole(this, 'ecsTaskRole', {
+      name: 'sample-cdktf-ecsTaskRole',
+      assumeRolePolicy: `{
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "ecs-tasks.amazonaws.com"
+          },
+          "Effect": "Allow",
+          "Sid": ""
+          }
+        ]
+      }`
     });
 
     /** VPC */
