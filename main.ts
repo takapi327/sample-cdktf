@@ -4,6 +4,7 @@ import {
   AwsProvider,
   IamRole,
   IamPolicy,
+  IamRolePolicyAttachment,
   Vpc,
   Subnet,
   InternetGateway,
@@ -47,6 +48,7 @@ class SampleCdktfStack extends TerraformStack {
         ]
       }`
     });
+
     const ecsTaskIamPolicy = new IamPolicy(scope, 'ecs-task-policy', {
       name:        'ecs-task-policy',
       description: 'Policy for updating ECS tasks',
@@ -77,6 +79,11 @@ class SampleCdktfStack extends TerraformStack {
           }
         ]
       }`
+    });
+
+    new IamRolePolicyAttachment(scope, 'ecs-task-policy-attach', {
+      role:      ecsTaskRole.name,
+      policyArn: ecsTaskIamPolicy.arn
     });
 
     /** VPC */
