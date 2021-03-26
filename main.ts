@@ -81,6 +81,23 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
+    const ecsTaskExecutionRole = new IamRole(this , 'ecsTaskExecutionRole',{
+      name: 'sample-cdktf-ecsTaskExecutionRole',
+      assumeRolePolicy: `{
+        "Version":   "2012-10-17",
+        "Statement": [
+          {
+            "Action":    "sts:AssumeRole",
+            "Principal": {
+              "Service": "ecs-tasks.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid":    ""
+          }
+        ]
+      }`
+    });
+
     new IamRolePolicyAttachment(scope, 'ecs-task-policy-attach', {
       role:      ecsTaskRole.name,
       policyArn: ecsTaskIamPolicy.arn
