@@ -98,6 +98,30 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
+    const ecsTaskExecutionIamPolicy = new IamPolicy(scope, 'ecs-task-execution-policy', {
+      name:        'ecs-task-execution-policy',
+      description: 'Policy for updating ECS tasks',
+      policy: `{
+        "Version":   "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "ecr:GetAuthorizationToken",
+              "ecr:BatchCheckLayerAvailability",
+              "ecr:GetDownloadUrlForLayer",
+              "ecr:BatchGetImage",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ],
+            "Resource": [
+              "*"
+            ],
+            "Effect": "Allow"
+          }
+        ]
+      }`
+    });
+
     new IamRolePolicyAttachment(scope, 'ecs-task-policy-attach', {
       role:      ecsTaskRole.name,
       policyArn: ecsTaskIamPolicy.arn
