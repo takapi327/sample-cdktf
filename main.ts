@@ -3,6 +3,7 @@ import { App, TerraformStack, Token } from 'cdktf';
 import {
   AwsProvider,
   IamRole,
+  IamPolicy,
   Vpc,
   Subnet,
   InternetGateway,
@@ -42,6 +43,37 @@ class SampleCdktfStack extends TerraformStack {
           },
           "Effect": "Allow",
           "Sid": ""
+          }
+        ]
+      }`
+    });
+    const ecsTaskIamPolicy = new IamPolicy(scope, 'ecs-task-policy', {
+      name:        'ecs-task-policy',
+      description: 'Policy for updating ECS tasks',
+      policy: `{
+        "Version":   "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "ecs:DescribeServices",
+              "ecs:CreateTaskSet",
+              "ecs:UpdateServicePrimaryTaskSet",
+              "ecs:DeleteTaskSet",
+              "elasticloadbalancing:DescribeTargetGroups",
+              "elasticloadbalancing:DescribeListeners",
+              "elasticloadbalancing:ModifyListener",
+              "elasticloadbalancing:DescribeRules",
+              "elasticloadbalancing:ModifyRule",
+              "lambda:InvokeFunction",
+              "cloudwatch:DescribeAlarms",
+              "sns:Publish",
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "*"
+            ],
+            "Effect": "Allow"
           }
         ]
       }`
