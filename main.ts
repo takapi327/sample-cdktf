@@ -19,7 +19,8 @@ import {
   AlbListener,
   AlbListenerRule,
   EcsCluster,
-  EcrRepository
+  EcrRepository,
+  EcsTaskDefinition
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -81,6 +82,11 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
+    new IamRolePolicyAttachment(scope, 'attach-ecs-task-policy', {
+      role:      ecsTaskRole.name,
+      policyArn: ecsTaskIamPolicy.arn
+    });
+
     const ecsTaskExecutionRole = new IamRole(this , 'ecsTaskExecutionRole',{
       name: 'sample-cdktf-ecsTaskExecutionRole',
       assumeRolePolicy: `{
@@ -122,9 +128,9 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
-    new IamRolePolicyAttachment(scope, 'ecs-task-policy-attach', {
-      role:      ecsTaskRole.name,
-      policyArn: ecsTaskIamPolicy.arn
+    new IamRolePolicyAttachment(scope, 'attach-ecs-task-execution-policy', {
+      role:      ecsTaskExecutionRole.name,
+      policyArn: ecsTaskExecutionIamPolicy.arn
     });
 
     /** VPC */
@@ -318,8 +324,41 @@ class SampleCdktfStack extends TerraformStack {
       name: 'sample-cdktf-cluster'
     });
 
-    const ecsRepository = new EcrRepository(scope, 'sample-cdktf-repository', {
+    const ecsRepository = new EcrRepository(this, 'sample-cdktf-repository', {
       name: 'project/sample-cdktf'
+    });
+
+    const containerDefinition: string = `[
+      {
+        "essential":    true,
+        "name":         "sample-cdktf-container",
+        "image":        "${ecsRepository.repositoryUrl}:latest",
+        "portMappings": [
+          {
+            "hostPort":      9000,
+            "protocol":      "tcp",
+            "containerPort": 9000
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group":         "/aws/ecs/sample-cdktf-task",
+            "awslogs-stream-prefix": "ecs",
+            "awslogs-region":        "ap-northeast-1"
+          }
+        }
+      }
+    ]`
+    const ecsTaskDefinition = new EcsTaskDefinition(this, 'sample-cdktf-task', {
+      containerDefinitions:    containerDefinition,
+      family:                  'task-for-cdktf',
+      networkMode:             'awsvpc',
+      executionRoleArn:        ecsTaskExecutionRole.arn,
+      taskRoleArn:             ecsTaskRole.arn,
+      cpu:                     '512',
+      memory:                  '1024',
+      requiresCompatibilities: [ 'FARGATE' ]
     });
   }
 }
