@@ -24,7 +24,8 @@ import {
   EcsService,
   S3Bucket,
   S3BucketObject,
-  LambdaFunction
+  LambdaFunction,
+  SnsTopic
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -468,7 +469,10 @@ class SampleCdktfStack extends TerraformStack {
       }]
     });
 
-
+    /** SNS */
+    const snsTopic = new SnsTopic(scope, 'sample-cdktf-sns', {
+      name: 'sample-cdktf-sns'
+    });
   }
 }
 
