@@ -22,8 +22,11 @@ import {
   EcrRepository,
   EcsTaskDefinition,
   EcsService,
-  S3Bucket
+  S3Bucket,
+  S3BucketObject
 } from './.gen/providers/aws';
+
+import * as path from 'path';
 
 class SampleCdktfStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -386,6 +389,13 @@ class SampleCdktfStack extends TerraformStack {
     const s3Bucket = new S3Bucket(scope, 'sample-cdktf-s3', {
       bucket: 'sample-cdktf-s3',
       region: 'ap-northeast-1'
+    });
+
+    new S3BucketObject(scope, 'notification-to-Slack-dist.zip', {
+      bucket:      s3Bucket.bucket,
+      key:         'notification-to-Slack-dist.zip',
+      contentType: 'zip',
+      source:      path.resolve('./src/main/typescript/notification/notification-to-Slack/notification-to-Slack-dist/notification-to-Slack-dist.zip')
     });
   }
 }
