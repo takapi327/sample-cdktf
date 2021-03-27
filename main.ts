@@ -158,6 +158,33 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
+    const lambdaExecutionIamPolicy = new IamPolicy(this, 'lambda-logging', {
+      name:        'sample-cdktf-lambda-logging',
+      description: 'IAM policy for logging from a lambda',
+      policy: `{
+        "Version":   "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "iam:PassRole",
+              "ecs:RegisterTaskDefinition",
+              "ecs:UpdateService",
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ],
+            "Resource": [
+              "*",
+              "arn:aws:logs:*:*:*",
+              "arn:aws:ecs:*:*:*",
+              "arn:aws:iam::445682127642:role/sample-cdktf-ecsTaskExecutionRole"
+            ],
+            "Effect": "Allow"
+          }
+        ]
+      }`
+    });
+
     /** VPC */
     const vpc = new Vpc(this, 'sample-cdktf-vpc', {
       cidrBlock:         '10.0.0.0/16',
