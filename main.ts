@@ -25,7 +25,8 @@ import {
   S3Bucket,
   S3BucketObject,
   LambdaFunction,
-  SnsTopic
+  SnsTopic,
+  SnsTopicSubscription
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -470,8 +471,14 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** SNS */
-    const snsTopic = new SnsTopic(scope, 'sample-cdktf-sns', {
+    const snsTopic = new SnsTopic(this, 'sample-cdktf-sns', {
       name: 'sample-cdktf-sns'
+    });
+
+    new SnsTopicSubscription(this, 'sample-cdktf-sns-subscription', {
+      endpoint: notificationToSlack.arn,
+      protocol: 'lambda',
+      topicArn: snsTopic.arn
     });
   }
 }
