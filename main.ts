@@ -138,6 +138,26 @@ class SampleCdktfStack extends TerraformStack {
       policyArn: ecsTaskExecutionIamPolicy.arn
     });
 
+    const lambdaExecutionRole = new IamRole(this , 'lambdaExecutionRole',{
+      name: 'sample-cdktf-lambdaExecutionRole',
+      assumeRolePolicy: `{
+        "Version":   "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": [
+                "lambda.amazonaws.com",
+                "ecs-tasks.amazonaws.com"
+              ]
+            },
+            "Effect": "Allow",
+            "Sid":    ""
+          }
+        ]
+      }`
+    });
+
     /** VPC */
     const vpc = new Vpc(this, 'sample-cdktf-vpc', {
       cidrBlock:         '10.0.0.0/16',
