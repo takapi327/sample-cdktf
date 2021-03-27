@@ -1,0 +1,6 @@
+{
+  "root": "./docs/src/main/",
+  "title": "CDK for Terraformで、AWS環境の構築",
+  "author": "takapi",
+  "language": "ja"
+}
