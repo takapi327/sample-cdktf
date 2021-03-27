@@ -185,6 +185,11 @@ class SampleCdktfStack extends TerraformStack {
       }`
     });
 
+    new IamRolePolicyAttachment(this, 'attach-lambda-policy', {
+      role:      lambdaExecutionRole.name,
+      policyArn: lambdaExecutionIamPolicy.arn
+    });
+
     /** VPC */
     const vpc = new Vpc(this, 'sample-cdktf-vpc', {
       cidrBlock:         '10.0.0.0/16',
