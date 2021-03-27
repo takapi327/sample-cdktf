@@ -25,6 +25,7 @@ import {
   S3Bucket,
   S3BucketObject,
   LambdaFunction,
+  LambdaPermission,
   SnsTopic,
   SnsTopicSubscription,
   SnsTopicPolicy
@@ -501,6 +502,16 @@ class SampleCdktfStack extends TerraformStack {
         }
       }`
     });
+
+    new LambdaPermission(this, 'permission-to-sns', {
+      action:       'lambda:InvokeFunction',
+      functionName: notificationToSlack.functionName,
+      principal:    'sns.amazonaws.com',
+      sourceArn:    snsTopic.arn,
+      statementId:  'AllowExecutionFromSNS'
+    });
+
+    /** CloudWatch */
   }
 }
 
