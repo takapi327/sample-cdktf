@@ -29,7 +29,8 @@ import {
   SnsTopic,
   SnsTopicSubscription,
   SnsTopicPolicy,
-  CloudwatchLogGroup
+  CloudwatchLogGroup,
+  CloudwatchEventRule
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -515,6 +516,19 @@ class SampleCdktfStack extends TerraformStack {
     /** CloudWatch */
     new CloudwatchLogGroup(this, 'sample-cdktf-notification-to-slack-log-group', {
       name: `/aws/lambda/${notificationToSlack.functionName}`
+    });
+
+    new CloudwatchEventRule(this, 'sample-cdktf-event-rule', {
+      name:        'capture-ecr-update',
+      description: 'Capture each AWS ECR Update',
+      eventPattern: `{
+        "source": ["aws.ecr"],
+        "detail-type": ["ECR Image Action"],
+        "detail": {
+          "action-type": ["PUSH"],
+          "result": ["SUCCESS"]
+        }
+      }`
     });
   }
 }
