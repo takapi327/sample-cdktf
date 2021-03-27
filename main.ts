@@ -20,7 +20,8 @@ import {
   AlbListenerRule,
   EcsCluster,
   EcrRepository,
-  EcsTaskDefinition
+  EcsTaskDefinition,
+  EcsService
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -359,6 +360,26 @@ class SampleCdktfStack extends TerraformStack {
       cpu:                     '512',
       memory:                  '1024',
       requiresCompatibilities: [ 'FARGATE' ]
+    });
+
+    new EcsService(this, 'sample-cdktf-ecs-service', {
+      cluster:                         Token.asString(ecsCluster.id),
+      deploymentMaximumPercent:        200,
+      deploymentMinimumHealthyPercent: 100,
+      desiredCount:                    1,
+      launchType:                      'FARGATE',
+      name:                            'sample-cdktf-ecs-service',
+      platformVersion:                 'LATEST',
+      taskDefinition:                  Token.asString(ecsTaskDefinition.id),
+      networkConfiguration:            [{
+        securityGroups: [Token.asString(vpc.defaultSecurityGroupId)],
+        subnets:        [Token.asString(privateSubnet1.id)]
+      }],
+      loadBalancer: [{
+        containerName:  'sample-cdktf-container',
+        containerPort:  9000,
+        targetGroupArn: albTargetGroup.arn
+      }]
     });
   }
 }
