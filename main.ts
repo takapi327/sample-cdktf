@@ -30,7 +30,8 @@ import {
   SnsTopicSubscription,
   SnsTopicPolicy,
   CloudwatchLogGroup,
-  CloudwatchEventRule
+  CloudwatchEventRule,
+  CloudwatchEventTarget
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -518,7 +519,7 @@ class SampleCdktfStack extends TerraformStack {
       name: `/aws/lambda/${notificationToSlack.functionName}`
     });
 
-    new CloudwatchEventRule(this, 'sample-cdktf-event-rule', {
+    const eventRule = new CloudwatchEventRule(this, 'sample-cdktf-event-rule', {
       name:        'capture-ecr-update',
       description: 'Capture each AWS ECR Update',
       eventPattern: `{
@@ -529,6 +530,12 @@ class SampleCdktfStack extends TerraformStack {
           "result": ["SUCCESS"]
         }
       }`
+    });
+
+    new CloudwatchEventTarget(this, 'sample-cdktf-event-target', {
+      arn:      snsTopic.arn,
+      rule:     eventRule.name,
+      targetId: 'SendToSNS'
     });
   }
 }
