@@ -23,7 +23,8 @@ import {
   EcsTaskDefinition,
   EcsService,
   S3Bucket,
-  S3BucketObject
+  S3BucketObject,
+  LambdaFunction
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -438,17 +439,36 @@ class SampleCdktfStack extends TerraformStack {
       }]
     });
 
-    const s3Bucket = new S3Bucket(scope, 'sample-cdktf-s3', {
+    const s3Bucket = new S3Bucket(this, 'sample-cdktf-s3', {
       bucket: 'sample-cdktf-s3',
       region: 'ap-northeast-1'
     });
 
-    new S3BucketObject(scope, 'notification-to-Slack-dist.zip', {
+    const s3BucketObject = new S3BucketObject(this, 'notification-to-Slack-dist.zip', {
       bucket:      s3Bucket.bucket,
       key:         'notification-to-Slack-dist.zip',
       contentType: 'zip',
       source:      path.resolve('./src/main/typescript/notification/notification-to-Slack/notification-to-Slack-dist/notification-to-Slack-dist.zip')
     });
+
+    /** LambdaFunction */
+    const notificationToSlack = new LambdaFunction(this, 'Sample-Lambda-Notification-to-Slack', {
+      functionName: 'Sample-Lambda-Notification-to-Slack',
+      handler:      'index.handler',
+      role:         lambdaExecutionRole.arn,
+      runtime:      'nodejs12.x',
+      s3Bucket:     s3Bucket.bucket,
+      s3Key:        s3BucketObject.key,
+      timeout:      30,
+      environment:  [{
+        variables: {
+          ['SLACK_API_TOKEN']: 'xoxb-xxxxxxxxxxxxxxxxxxxxxxx',
+          ['SLACK_CHANNEL']:   'xxxxxxxxxxxx'
+        }
+      }]
+    });
+
+
   }
 }
 
