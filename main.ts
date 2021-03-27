@@ -28,7 +28,8 @@ import {
   LambdaPermission,
   SnsTopic,
   SnsTopicSubscription,
-  SnsTopicPolicy
+  SnsTopicPolicy,
+  CloudwatchLogGroup
 } from './.gen/providers/aws';
 
 import * as path from 'path';
@@ -456,8 +457,8 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** LambdaFunction */
-    const notificationToSlack = new LambdaFunction(this, 'Sample-Lambda-Notification-to-Slack', {
-      functionName: 'Sample-Lambda-Notification-to-Slack',
+    const notificationToSlack = new LambdaFunction(this, 'sample-cdktf-notification-to-slack', {
+      functionName: 'Sample-cdktf-Notification-to-Slack',
       handler:      'index.handler',
       role:         lambdaExecutionRole.arn,
       runtime:      'nodejs12.x',
@@ -512,6 +513,9 @@ class SampleCdktfStack extends TerraformStack {
     });
 
     /** CloudWatch */
+    new CloudwatchLogGroup(this, 'sample-cdktf-notification-to-slack-log-group', {
+      name: `/aws/lambda/${notificationToSlack.functionName}`
+    });
   }
 }
 
