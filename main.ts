@@ -21,7 +21,8 @@ import {
   EcsCluster,
   EcrRepository,
   EcsTaskDefinition,
-  EcsService
+  EcsService,
+  S3Bucket
 } from './.gen/providers/aws';
 
 class SampleCdktfStack extends TerraformStack {
@@ -380,6 +381,11 @@ class SampleCdktfStack extends TerraformStack {
         containerPort:  9000,
         targetGroupArn: albTargetGroup.arn
       }]
+    });
+
+    const s3Bucket = new S3Bucket(scope, 'sample-cdktf-s3', {
+      bucket: 'sample-cdktf-s3',
+      region: 'ap-northeast-1'
     });
   }
 }
