@@ -1,4 +1,4 @@
-# sample-cdktf
+# CDK for Terraformで、AWS環境の構築
 ## 概要
 CDK for Terraformを使用した、AWSインフラ環境構築
 ## 実行環境

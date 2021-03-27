@@ -1,7 +1,7 @@
 # Summary
 
 * [はじめに](README.md)
-  * [CDK for Terraform](part0/CDKTF.md)
+  * [CDK for Terraform](part0/README.md)
 * [ネットワークレイヤー](part1/README.md)
     * [VPC](part1/VPC.md)
     * [サブネット](part1/SUBNET.md)

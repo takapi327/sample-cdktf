@@ -1,0 +1,565 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>CDK for Terraform · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.19">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../part1/README.md" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CDK for Terraform
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../part1/README.md">
+            
+                <span>
+            
+                    
+                    ネットワークレイヤー
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../part1/VPC.md">
+            
+                <span>
+            
+                    
+                    VPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../part1/SUBNET.md">
+            
+                <span>
+            
+                    
+                    サブネット
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../part1/INTERNET-GATEWAY.md">
+            
+                <span>
+            
+                    
+                    インターネットゲートウェイ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../part1/NAT-GATEWAY.md">
+            
+                <span>
+            
+                    
+                    NATゲートウェイ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../part1/ROOT-TABLE.md">
+            
+                <span>
+            
+                    
+                    ルートテーブル
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../part1/SECURITY-GROUP.md">
+            
+                <span>
+            
+                    
+                    セキュリティグループ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../part2/README.md">
+            
+                <span>
+            
+                    
+                    アプリケーションレイヤー
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../part2/ALB.md">
+            
+                <span>
+            
+                    
+                    ALB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../part2/ECS.md">
+            
+                <span>
+            
+                    
+                    ECS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../part2/ECR.md">
+            
+                <span>
+            
+                    
+                    ECR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../part2/S3.md">
+            
+                <span>
+            
+                    
+                    S3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../part2/LAMBDA.md">
+            
+                <span>
+            
+                    
+                    Lambda
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../part2/SNS.md">
+            
+                <span>
+            
+                    
+                    SNS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../part2/CLOUD-WATCH.md">
+            
+                <span>
+            
+                    
+                    CloudWatch
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >CDK for Terraform</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="cdk-for-terraformの初期化">CDK for Terraformの初期化</h1>
+<h2 id="概要">概要</h2>
+<p>CDK for Terraformを使用できるように設定を行います。
+設定は、下記公式を参照しています。<br>
+<a href="https://medium.com/r/?url=https%3A%2F%2Fwww.hashicorp.com%2Fblog%2Fcdk-for-terraform-enabling-python-and-typescript-support" target="_blank">CDK for Terraform: Enabling Python &amp; TypeScript Support</a></p>
+<h2 id="terraformのインストール">Terraformのインストール</h2>
+<p>Terraformをインストールしていないと、下記のようなエラーが発生してしまします。</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># Terraform CLI not present - Please install a current version</span>
+https://learn.hashicorp.com/terraform/getting-started/install.html
+</code></pre>
+<p>なのでまずは、公式を参照してTerraformをインストールしていきます。</p>
+<p>公式: <a href="https://medium.com/r/?url=https%3A%2F%2Flearn.hashicorp.com%2Ftutorials%2Fterraform%2Finstall-cli" target="_blank">Install Terraform</a></p>
+<pre><code class="lang-bash">$ brew tap hashicorp/tap
+$ brew install hashicorp/tap/terraform
+</code></pre>
+<p>インストール完了後、Terraformはバージョンアップに追従しやすいtfenvの利用を推奨しているので、以下手順でtfenvもインストールします。</p>
+<ol>
+<li>Terraformのバージョンマネージャである、tfenvをインストール</li>
+<li>現在使用可能なTerraformのバージョンを確認</li>
+<li>使用したいTerraformのバージョンをインストールする</li>
+<li>使用したいTerraformのバージョンを使用する</li>
+</ol>
+<pre><code class="lang-bash">$ brew install tfenv
+$ tfenv list-remote
+$ tfenv install 使用したいバージョン
+$ tfenv use 使用したいバージョン
+</code></pre>
+<p>インストール完了後、以下コマンドでバージョンを確認できれば完了です。</p>
+<pre><code class="lang-bash">$ terraform --version
+Terraform v0.14.8
+$ tfenv --version
+tfenv 2.0.0
+</code></pre>
+<h2 id="cdk-for-terraformのインストール">CDK for Terraformのインストール</h2>
+<p>Terraformのインストールが終わったので、本命のCDK for Terraformをインストールしていきます。</p>
+<p>今回は、公式と同じように下記コマンドで、グローバルインストールを行います。</p>
+<pre><code class="lang-bash">$ npm install -g cdktf-cli
+</code></pre>
+<p>グローバルインストールが嫌な場合は、以下記事を参考にインストールと初期化を行ってください。</p>
+<p><a href="https://medium.com/r/?url=https%3A%2F%2Fdev.classmethod.jp%2Farticles%2Fcdk-for-terraform%2F" target="_blank">AWS CDKでプロバイダーとしてTerraformが使える！！CDK for Terraformが発表されました！！</a></p>
+<h2 id="cdk-for-terraformの初期化">CDK for Terraformの初期化</h2>
+<p>以下コマンドを実行し、新規プロジェクトの初期化を行います。</p>
+<p>今回は、TypeScriptを使用しますので、templateにtypescriptを指定します。</p>
+<pre><code class="lang-bash">$ mkdir sample-cfktf
+$ <span class="hljs-built_in">cd</span> sample-cfktf
+$ cdktf init --template=typescript
+</code></pre>
+<p>初期化完了後、ファイルが生成されていれば成功です。</p>
+<p>初期化完了後のファイル一覧に.genディレクトリがなければ、以下手順を行う必要があります。</p>
+<p>作成したプロジェクトで、再度 npm install cdktf-cliを行うもしくは、生成されたcdktf.jsonを以下のように編集します。</p>
+<pre><code class="lang-typescript">{
+  <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;typescript&quot;</span>,
+  <span class="hljs-string">&quot;app&quot;</span>: <span class="hljs-string">&quot;npm run --silent compile &amp;&amp; node main.js&quot;</span>,
+  <span class="hljs-string">&quot;terraformProviders&quot;</span>: [
+    <span class="hljs-string">&quot;aws@~&gt; 2.0&quot;</span> <span class="hljs-comment">// &lt;- 追加</span>
+  ],
+  ...
+}
+</code></pre>
+<p>上記のように、terraformProvidersの中にaws@~があれば、次は以下コマンドを実行します。</p>
+<pre><code class="lang-bash">$ cdktf get
+</code></pre>
+<p>実行後、Generated typescript constructs in the output directory: .genと表示されてプロジェクトにも.genディレクトリ生成されていれば、成功です。</p>
+<p>CDK for Terraformは、この.genディレクトリにパッケージを置いておくようです。</p>
+<p>今回は、awsのみインストールしています。</p>
+<p>これで、aws用のパッケージをimportして使用することができるようになりました。</p>
+<p>ここまでで、CDK for Terraformの初期化は完了です。</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: はじめに">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../part1/README.md" class="navigation navigation-next " aria-label="Next page: ネットワークレイヤー">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CDK for Terraform","level":"1.1.1","depth":2,"next":{"title":"ネットワークレイヤー","level":"1.2","depth":1,"path":"part1/README.md","ref":"part1/README.md","articles":[{"title":"VPC","level":"1.2.1","depth":2,"path":"part1/VPC.md","ref":"part1/VPC.md","articles":[]},{"title":"サブネット","level":"1.2.2","depth":2,"path":"part1/SUBNET.md","ref":"part1/SUBNET.md","articles":[]},{"title":"インターネットゲートウェイ","level":"1.2.3","depth":2,"path":"part1/INTERNET-GATEWAY.md","ref":"part1/INTERNET-GATEWAY.md","articles":[]},{"title":"NATゲートウェイ","level":"1.2.4","depth":2,"path":"part1/NAT-GATEWAY.md","ref":"part1/NAT-GATEWAY.md","articles":[]},{"title":"ルートテーブル","level":"1.2.5","depth":2,"path":"part1/ROOT-TABLE.md","ref":"part1/ROOT-TABLE.md","articles":[]},{"title":"セキュリティグループ","level":"1.2.6","depth":2,"path":"part1/SECURITY-GROUP.md","ref":"part1/SECURITY-GROUP.md","articles":[]}]},"previous":{"title":"はじめに","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[{"title":"CDK for Terraform","level":"1.1.1","depth":2,"path":"part0/README.md","ref":"part0/README.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part0/README.md","mtime":"2021-03-27T10:40:33.018Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2021-03-27T10:40:41.041Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
